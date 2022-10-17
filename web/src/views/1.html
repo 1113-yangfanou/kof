@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.js"></script>
+</head>
+<body>
+    <img src="https://image20221016.oss-cn-shanghai.aliyuncs.com/OIP-C.jpg" alt="" >
+    <p id="text"></p>
+    <script>
+        $.ajax({
+            url: "http://127.0.0.1:3000/backend_war_exploded/analyze",
+            type:'post',
+            data: {
+                username: "yangfanou",
+                photo: "https://image20221016.oss-cn-shanghai.aliyuncs.com/OIP-C.jpg",
+                face_token: "f2094a12cff31dc028b1366af0fec497",
+            },
+            success(data) {
+                let result = JSON.parse(data);
+                document.getElementById("text").innerHTML = result.description;
+            },
+            error(data) {
+                console.log(data);
+            }
+        })
+    </script>
+</body>
+</html>

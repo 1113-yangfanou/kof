@@ -9,5 +9,6 @@
     </typeAliases>
     <mappers>
         <mapper class="com.yang.dao.UserMapper"></mapper>
+        <mapper class="com.yang.dao.RecordMapper"></mapper>
     </mappers>
 </configuration>
