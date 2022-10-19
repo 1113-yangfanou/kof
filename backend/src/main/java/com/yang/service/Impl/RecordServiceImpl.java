@@ -1,5 +1,7 @@
 package com.yang.service.Impl;
 
+import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
 import com.yang.dao.RecordMapper;
 import com.yang.pojo.Record;
 import com.yang.service.RecordService;
@@ -24,8 +26,14 @@ public class RecordServiceImpl implements RecordService{
     }
 
     @Override
-    public List<Record> getAllRecord() {
-        return recordMapper.getAllRecord();
+    public JSONObject getAllRecord(int page) {
+        PageHelper.startPage(page, 5);
+        List<Record> records = recordMapper.getAllRecordByPage(page);
+        List<Record> count = recordMapper.getAllRecord();
+        JSONObject resp = new JSONObject();
+        resp.put("record", records);
+        resp.put("count", count.size());
+        return resp;
     }
 
     @Override

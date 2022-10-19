@@ -12,23 +12,29 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ApiUtil {
-    private static final String url = "https://api-cn.faceplusplus.com/facepp/v3/face/analyze";
+    private static final String analyze_url = "https://api-cn.faceplusplus.com/facepp/v3/face/analyze";
+    private static final String detect_url = "https://api-cn.faceplusplus.com/facepp/v3/detect";
     private static final String api_key = "7M-nNVlV2-d9xNy6AHwvAN_vFSolbWex";
     private static final String api_secret = "HaiZTaPB--Az745QmCvEy_kWQoYBLdAn";
     public static String result(String face_token) {
-        Map<String, String> map = new HashMap<>();
         List<BasicNameValuePair> list = new ArrayList<>();
         list.add(new BasicNameValuePair("api_key", api_key));
         list.add(new BasicNameValuePair("api_secret", api_secret));
         list.add(new BasicNameValuePair("face_tokens", face_token));
         list.add(new BasicNameValuePair("return_landmark", "2"));
         list.add(new BasicNameValuePair("return_attributes", "gender,beauty,age,emotion,skinstatus"));
-        return httpRequest(url, list);
+        return httpRequest(analyze_url, list);
+    }
+
+    public static String getToken(String url) {
+        List<BasicNameValuePair> list = new ArrayList<>();
+        list.add(new BasicNameValuePair("api_key", api_key));
+        list.add(new BasicNameValuePair("api_secret", api_secret));
+        list.add(new BasicNameValuePair("image_url", url));
+        return httpRequest(detect_url, list);
     }
     private static String httpRequest(String RequestUrl, List<BasicNameValuePair> list) {
         StringBuffer buffer = new StringBuffer();

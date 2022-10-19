@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.js"></script>
+</head>
+<body>
+
+    <script>
+        $.ajax({
+            url:'http://127.0.0.1:3000/backend_war_exploded/get/token',
+            type:'post',
+            data: {
+                url: 'https://image20221016.oss-cn-shanghai.aliyuncs.com/images/2022/10/19/1666159117945.jpg',
+            },
+            success(resp) {
+                console.log(resp);
+            },
+            error(resp) {
+                console.log(resp);
+            }
+        })
+    </script>
+
+</body>
+</html>

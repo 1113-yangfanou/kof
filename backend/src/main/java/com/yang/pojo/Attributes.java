@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Attributes {
-    private String gender;
+    private List<Gender> gender;
     private List<Age> age;
     private List<Beauty> beauty;
     private List<Emotion> emotion;

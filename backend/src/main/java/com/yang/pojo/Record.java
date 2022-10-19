@@ -13,4 +13,5 @@ public class Record {
     private String photo;
     private Integer rating;
     private String description;
+    private double score;
 }

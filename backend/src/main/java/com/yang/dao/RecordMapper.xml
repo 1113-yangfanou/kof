@@ -4,15 +4,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yang.dao.RecordMapper">
     <insert id="addRecord" parameterType="com.yang.pojo.Record">
-        insert into record(username, photo, rating, description) values(#{username}, #{photo}, #{rating}, #{description})
+        insert into record(username, photo, rating, description, score) values(#{username}, #{photo}, #{rating}, #{description},#{score})
     </insert>
     <delete id="deleteRecord" parameterType="int">
         delete from record where id = #{id}
     </delete>
-    <select id="getAllRecord" resultType="com.yang.pojo.Record">
-        select * from record
+    <select id="getAllRecordByPage" resultType="com.yang.pojo.Record">
+        select * from record order by score desc
     </select>
     <select id="getByName" resultType="com.yang.pojo.Record">
-        select * from where username = #{username}
+        select * from record where username = #{username}
+    </select>
+    <select id="getAllRecord" resultType="com.yang.pojo.Record">
+        select * from record
     </select>
 </mapper>

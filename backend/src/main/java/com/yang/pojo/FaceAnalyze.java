@@ -11,5 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 public class FaceAnalyze {
     private String RequestId;
+    private String ErrorMessage;
+    private Integer FaceNum;
     private List<Faces> faces;
 }

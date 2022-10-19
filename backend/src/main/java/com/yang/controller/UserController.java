@@ -1,15 +1,14 @@
 package com.yang.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.yang.pojo.User;
+import com.yang.service.RecordService;
 import com.yang.service.UserService;
 import com.yang.utils.OssUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -24,10 +23,15 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RecordService recordService;
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Map<String, String> login(String username, String password) {
+    public Map<String, String> login(@RequestParam Map<String, String> data) {
         Map<String, String> map = new HashMap<>();
+        String username = data.get("username");
+        String password = data.get("password");
+        System.out.println("username = " + username + ", password = " + password);
         User user = userService.getUserByName(username);
         if(user != null) {
             if(user.getPassword().equals(password)) {
@@ -44,7 +48,9 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public Map<String, String> register(String username, String password) {
+    public Map<String, String> register(@RequestParam Map<String, String> data) {
+        String username = data.get("username");
+        String password = data.get("password");
         User _user = userService.getUserByName(username);
         Map<String, String> map = new HashMap<>();
         if(_user != null) {
@@ -55,7 +61,7 @@ public class UserController {
                 null,
                 username,
                 password,
-                "https://cdn.acwing.com/media/user/profile/photo/74403_sm_d2ffba214d.jpg",
+                "https://tse3-mm.cn.bing.net/th/id/OIP-C.bSxjWFuOoVlnfbGD6W4FfgAAAA?w=204&h=204&c=7&r=0&o=5&pid=1.7",
                 1500
         );
         int i = userService.addUser(user);
@@ -75,6 +81,12 @@ public class UserController {
         map.put("msg", "上传成功");
         map.put("url", url);
         return map;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/get/ranklist", method = RequestMethod.GET)
+    public JSONObject getRankList(@RequestParam Map<String, String> data) {
+        return recordService.getAllRecord(Integer.parseInt(data.get("page")));
     }
 
 }
