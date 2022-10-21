@@ -8,17 +8,12 @@
       <img src="../assets/bc.png" alt="这是一个图片">
       <img src="../assets/b.png" alt="安全" style="margin-top: 40px;">
     </div>
-
   </ContentField>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue"
+<script setup lang="ts">
 import ContentField from "../components/ContentField.vue"
-export default defineComponent({
-  components: {ContentField},
 
-})
 </script>
 
 <style scoped>

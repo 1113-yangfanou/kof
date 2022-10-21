@@ -20,19 +20,13 @@
   </ContentField>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import ContentField from '../components/ContentField.vue'
 import { ref } from 'vue'
 import {defineComponent} from "vue";
 import { login } from '../api/user'
 import router from '../router/index'
 import {userStore} from "../store/";
-
-export default defineComponent ({
-  components: {
-    ContentField
-  },
-  setup() {
     let username = ref('');
     let password = ref('');
     let error_message = ref('');
@@ -58,14 +52,8 @@ export default defineComponent ({
         }
       })
     }
-    return {
-      username,
-      password,
-      error_message,
-      UserLogin,
-    }
-  }
-})
+
+
 </script>
 
 <style scoped>

@@ -8,13 +8,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <router-link :class="route_name == 'home' ? 'nav-link active' : 'nav-link'" :to="{name:'home'}">首页</router-link>
+            <router-link :class="route_name === 'home' ? 'nav-link active' : 'nav-link'" :to="{name:'home'}">首页</router-link>
           </li>
           <li class="nav-item">
-            <router-link :class="route_name == 'mineface' ? 'nav-link active' : 'nav-link'" :to="{name:'mineface'}">我的颜值</router-link>
+            <router-link :class="route_name === 'mineface' ? 'nav-link active' : 'nav-link'" :to="{name:'mineface'}">我的颜值</router-link>
           </li>
           <li class="nav-item">
-            <router-link :class="route_name == 'ranklist' ? 'nav-link active' : 'nav-link'" :to="{name:'ranklist'}">颜值排行榜</router-link>
+            <router-link :class="route_name === 'ranklist' ? 'nav-link active' : 'nav-link'" :to="{name:'ranklist'}">颜值排行榜</router-link>
           </li>
         </ul>
         <ul class="navbar-nav" v-if="store.is_login">
@@ -34,28 +34,22 @@
   </nav>
 </template>
 
-<script lang="ts">
-import { useRoute} from "vue-router";
+<script setup lang="ts">
+import { useRoute } from "vue-router";
 import { computed } from 'vue';
-import {userStore} from "../store/";
+import { userStore } from "../store/";
 
 
-export default {
-  setup() {
-    const route = useRoute();
-    let route_name = computed(() => route.name)
-    const store = userStore();
-    const logout = () => {
-      store.logout();
+let route = useRoute();
+console.log(route);
 
-    }
-    return {
-      route_name,
-      store,
-      logout,
-    }
+const route_name = computed(() => route.name)
+
+const store = userStore();
+const logout = () => {
+  store.logout();
 }
-}
+
 </script>
 
 <style scoped>

@@ -22,16 +22,12 @@
   </ContentField>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import ContentField from "../components/ContentField.vue"
 import {userStore} from "../store";
 import {analyze, getToken, upload} from "../api/user";
-import {defineComponent, ref } from "vue";
+import { ref } from "vue";
 
-
-export default defineComponent({
-  components: {ContentField},
-  setup() {
     const store = userStore();
     let msg = ref('');
     const getFile = (e:any) =>{
@@ -77,15 +73,6 @@ export default defineComponent({
         }
       })
     }
-
-    return {
-      store,
-      msg,
-      getFile,
-      analyzeFace
-    }
-  }
-})
 </script>
 
 <style scoped>

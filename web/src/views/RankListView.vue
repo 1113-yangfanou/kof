@@ -1,29 +1,32 @@
 <template>
   <ContentField>
-    <table class="table">
+    <table class="table" >
       <thead>
       <tr>
-        <th scope="col">昵称</th>
-        <th scope="col">图片</th>
-        <th scope="col">颜值分数</th>
-        <th scope="col">分析</th>
+        <th scope="col" style="text-align: center">昵称</th>
+        <th scope="col" style="text-align: center">图片</th>
+        <th scope="col" style="text-align: center">颜值分数</th>
+        <th scope="col" style="text-align: center">分析</th>
       </tr>
       </thead>
       <tbody>
         <tr v-for="record in records" key="record.id">
-          <td>{{record.username}}</td>
+          <td style="text-align: center">{{record.username}}</td>
           <td>
-            <div>
+            <div >
               <img :src="record.photo" alt=""  class="record-img">
             </div>
           </td>
-          <td>{{record.score}}</td>
-          <td v-html="record.description"></td>
+          <td style="width:100px; text-align: center">{{record.score}}</td>
+          <td  v-html="record.description"></td>
         </tr>
       </tbody>
     </table>
     <nav aria-label="...">
       <ul class="pagination" style="float: right;">
+        <li class="page-item" @click="click_page(10)">
+          <a class="page-link" href="#">首页</a>
+        </li>
         <li class="page-item" @click="click_page(-2)">
           <a class="page-link" href="#">前一页</a>
         </li>
@@ -33,28 +36,31 @@
         <li class="page-item" @click="click_page(-1)">
           <a class="page-link" href="#">后一页</a>
         </li>
+        <li class="page-item" @click="click_page(11)">
+          <a class="page-link" href="#">尾页</a>
+        </li>
       </ul>
     </nav>
   </ContentField>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import ContentField from "../components/ContentField.vue"
-import {defineComponent, ref} from "vue";
+import { ref} from "vue";
 import {getRankList} from "../api/user";
 
-export default defineComponent({
-  components: {ContentField},
-  setup() {
     let current_page = 1;
     let total = 0;
-    let records = ref([]);
+    let records = ref<{username: string, photo:string, score:number, description: string}[]>([]);
     // let pages = ref(<{number:number, is_active: string}[]>[]);
     let pages = ref<{number:number, is_active:string}[]>([]);
     const click_page = (page: number) => {
+      let max_pages = Math.ceil(total / 5);
       if(page === -2) page = current_page - 1;
       else if(page === -1) page = current_page + 1;
-      let max_pages = Math.ceil(total / 5);
+      else if(page === 10) page = 1;
+      else if(page === 11) page = max_pages;
+
       if(page >= 1 && page <= max_pages) {
         pull_page(page);
       }
@@ -82,14 +88,7 @@ export default defineComponent({
       })
     }
     pull_page(current_page);
-    return {
-      records,
-      pages,
-      click_page
-    }
-  }
 
-})
 </script>
 
 <style scoped>
