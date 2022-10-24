@@ -13,15 +13,15 @@ public class OssUtil {
 
     //==========================下面五项配置修改成自己的========================//
     //区域
-    private static final String endpoint = "oss-cn-shanghai.aliyuncs.com";
+    private static final String endpoint = "";
     //访问id
-    private static final String accessKeyId = "LTAI5tQJPe8QNdE2Zk7o5Xw2";
+    private static final String accessKeyId = "";
     //访问秘钥
-    private static final String accessKeySecret = "spvEK0keSQhTgFn8MP51u8B1oqFREh";
+    private static final String accessKeySecret = "";
     //桶名称
-    private static final String bucketName = "image20221016";
+    private static final String bucketName = "";
     //访问URL
-    private static final String url = "https://image20221016.oss-cn-shanghai.aliyuncs.com";
+    private static final String url = "";
 
 
     //文件上传
